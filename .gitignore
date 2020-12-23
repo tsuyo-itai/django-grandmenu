@@ -1,0 +1,5 @@
+__pycache__/
+/grandmenu/.DS_Store
+/grandmenu/db.sqlite3
+/grandmenu/venv
+/grandmenu/Memo

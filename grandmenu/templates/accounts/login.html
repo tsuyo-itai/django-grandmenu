@@ -1,0 +1,43 @@
+{% extends "accounts/base.html" %}
+{% load widget_tweaks %}
+{% block global_navi %}
+
+    <div class="wrapper--login">
+      <div class="radio_button--login">
+        <input type="radio" id="login" class="js-show__container radio_button--login__radio" name="login_or_registration" value="login" checked="true" data-container="login_form">
+          <label for="login">ログイン</label>
+
+        <input type="radio" id="registration" class="js-show__container radio_button--login__radio" name="login_or_registration" value="registration" data-container="registration_form">
+          <label for="registration">登録</label>
+      </div>
+
+      <!-- <form class="js-form--login form--login" action="/login" method="post" data-target="login_form"> -->
+      <form class="js-form--login form--login" action="{% url 'accounts:login' %}" method="post" data-target="login_form">
+        {% csrf_token %}
+        <!-- <input class="text_box--small" type="email" name="e_mail" placeholder="ログインメールアドレス" required> -->
+        {% render_field form.username class='text_box--small' placeholder='ログインメールアドレス' %}
+        <!-- <input class="text_box--small" type="password" name="password" placeholder="password" required> -->
+        {% render_field form.password class='text_box--small' placeholder='password' %}
+        <!-- <div class="error">{{session.error}}</div> -->
+        <div class="error">{{ form.non_field_errors }}</div>
+        {{ field.errors }}
+        <button class="form__button" type="submit">
+          <span>Login</span>
+          <span>Login</span>
+        </button>
+      </form>
+
+
+
+      <div class="js-form--registration form--registration form_registration" data-target="registration_form">
+        <a href="{% url 'accounts:user_create' %}"
+          <button class="form__button" type="button">
+            <span>GO！！</span>
+            <span>会員登録</span>
+          </button>
+        </a>
+
+      </div>
+      <div class="picture--base"></div>
+    </div>
+{% endblock %}

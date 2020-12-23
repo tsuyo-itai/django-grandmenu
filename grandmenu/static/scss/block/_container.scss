@@ -1,0 +1,41 @@
+@import "../setting/setting.scss";
+
+.container{
+	&--datepicker_day{
+		display: flex;
+		flex-flow: column nowrap;
+	}
+	&--datepicker_period{
+		display: none;
+		flex-flow: column nowrap;
+	}
+	&--calendar{
+		display: none;
+		width: 280px;
+		flex-flow: wrap;
+		text-size: 0px;
+		overflow: hidden;
+		filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+	}
+	&--bar_chart {
+		width: 80%;
+		max-width: 960px;
+		height: 100%;
+		position: relative;
+	}
+	&--controller{
+		display: flex;
+		flex-direction: row-reverse;
+		position: fixed;
+		right: 0px;
+		bottom: 0px;
+		height: 90px;
+		width: 100%;
+		padding-top: 20px;
+		backdrop-filter: blur(5px);
+	}
+	&--kitchen_qrcode{
+		display: flex;
+		flex-flow: column;
+	}
+}
