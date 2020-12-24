@@ -1,0 +1,24 @@
+{% extends "accounts/base.html" %}
+{% load widget_tweaks %}
+{% block global_navi %}
+
+<form class="form--store_information" action="{% url 'myapp:store_setting' %}" method="post">
+  {% csrf_token %}
+  {% render_field form.STORE_NAME class='text_box--small' placeholder=form.STORE_NAME.label %}
+
+  {% render_field form.STORE_POSTAL_CODE class='text_box--small' placeholder=form.STORE_POSTAL_CODE.label %}
+  <div class="error">{{form.STORE_POSTAL_CODE.errors}}</div>
+
+  {% render_field form.STORE_ADDRESS class='text_box--small' placeholder=form.STORE_ADDRESS.label %}
+
+  {% render_field form.STORE_TEL class='text_box--small' placeholder=form.STORE_TEL.label %}
+  <div class="error">{{form.STORE_POSTAL_CODE.errors}}</div>
+
+  <button class="form__button" type="submit" name="store_id">
+    <span>確定</span>
+    <span>登録</span>
+  </button>
+</form>
+
+
+{% endblock %}

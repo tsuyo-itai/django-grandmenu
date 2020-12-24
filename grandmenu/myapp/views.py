@@ -30,3 +30,17 @@ def debug_storeinfolist(request):
     data = StoreInfo.objects.all()
     params = {'message': '店情報の一覧', 'data': data}
     return render(request, 'myapp/debug_storeinfolist.html', params)
+
+def store_setting(request):
+    params = {'message': '', 'form': None}
+    if request.method == 'POST':
+        form = StoreInfoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:home')
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
+    else:
+        params['form'] = StoreInfoForm()
+    return render(request, 'myapp/store_setting.html', params)
