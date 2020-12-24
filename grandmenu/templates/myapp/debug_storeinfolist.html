@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8" />
+    <title>Member表</title>
+</head>
+ 
+<body>
+    <h1>店情報モデル</h1>
+    <p>{{ message }}</p>
+    <table border="1">
+        <tr>
+            <th>STORE_NAME</th>
+            <th>STORE_POSTAL_CODE</th>
+            <th>STORE_ADDRESS</th>
+            <th>STORE_TEL</th>
+        </tr>
+        {% for shopinfo in data %}
+        <tr>
+            <td>{{ shopinfo.STORE_NAME }}</td>
+            <td>{{ shopinfo.STORE_POSTAL_CODE }}</td>
+            <td>{{ shopinfo.STORE_ADDRESS }}</td>
+            <td>{{ shopinfo.STORE_TEL }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+ 
+</html>

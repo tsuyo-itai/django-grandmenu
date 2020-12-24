@@ -8,4 +8,6 @@ app_name = 'myapp'
 
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
+    path('debug_storeinfo/', views.debug_storeinfo, name='debug_storeinfo'),
+    path('debug_storeinfolist/', views.debug_storeinfolist, name='debug_storeinfolist'),
 ]
