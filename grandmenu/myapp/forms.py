@@ -1,6 +1,10 @@
 from django import forms
 from .models import StoreInfo
 
+"""========================================================
+店舗情報作成・編集用フォーム
+model:  StoreInfo
+========================================================"""
 class StoreInfoForm(forms.ModelForm):
     class Meta:
         model = StoreInfo

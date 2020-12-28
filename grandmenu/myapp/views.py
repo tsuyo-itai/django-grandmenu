@@ -1,14 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic
-from django.views.generic import UpdateView
-from django.urls import reverse_lazy
-
 from .forms import StoreInfoForm
-from accounts.forms import LoginForm, UserCreateForm
 from .models import StoreInfo
 
-from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
