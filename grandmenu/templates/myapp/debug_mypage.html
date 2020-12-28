@@ -20,8 +20,14 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <center>
+                <a href="{% url 'myapp:store_mypage_edit' %}">
+                    <button type="button" class="btn col-sm-6 btn-warning">編集</button>
+                </a>
+            </center>
         </div>
     </div>
+
 
 
 {% endblock %}

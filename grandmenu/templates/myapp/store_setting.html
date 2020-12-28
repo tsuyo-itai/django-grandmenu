@@ -5,7 +5,7 @@
 <form class="form--store_information" action="{% url 'myapp:store_setting' %}" method="post">
   {% csrf_token %}
   <!-- ここはログインユーザーで自動入力(formとして送信しないとエラーになるため　hiddenとして確保) -->
-  <div hidden>{% render_field form.STORE_EMAIL class='text_box--small' placeholder=form.STORE_EMAIL.label %}</div>
+  <!-- <div hidden>{% render_field form.STORE_EMAIL class='text_box--small' placeholder=form.STORE_EMAIL.label %}</div> -->
 
   {% render_field form.STORE_NAME class='text_box--small' placeholder=form.STORE_NAME.label %}
 

@@ -4,7 +4,7 @@ $(document).ready(function(){
       ws_order = "../static/js/websocket_order.js",
       ws_kitchin = "../static/js/websocket_kitchin.js"
   // サイドメニューの表示
-  if (pathname != '/order_menu' && pathname != '/logout'){
+  if (pathname != '/order_menu' && pathname != '/accounts/logout'){
     $('.wrapper--header').prepend(
       '<div class="header__menu js-header__menu icon_menu">'+
         '<span></span>'+
@@ -38,7 +38,7 @@ $(document).ready(function(){
           '<li><a class="side_menu_2__content" href="#">従業員情報</a></li>'+
           '<li><a class="side_menu_2__content" href="/sales_management">売上管理</a></li>'+
         '</ul>'+
-        '<a class="side_menu__logout" href="/logout">ログアウト</a>'+
+        '<a class="side_menu__logout" href="/accounts/logout">ログアウト</a>'+
       '</ul>'
     );
   };

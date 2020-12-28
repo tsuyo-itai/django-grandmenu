@@ -20,3 +20,5 @@ class StoreInfoForm(forms.ModelForm):
             'STORE_ADDRESS': '住所を入力',
             'STORE_TEL': '電話番号を入力'
         }
+
+        exclude = ["STORE_EMAIL"]       #Form入力の除外を行う

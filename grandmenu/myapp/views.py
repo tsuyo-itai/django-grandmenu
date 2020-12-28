@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 
 from .forms import StoreInfoForm
 from accounts.forms import LoginForm, UserCreateForm
@@ -48,8 +50,7 @@ def store_setting(request):
             params['message'] = '再入力して下さい'
             params['form'] = form
     else:
-        store_email = StoreInfo(STORE_EMAIL=request.user)   #form入力以外で設定したいのでインスタンスを作成しておく
-        params['form'] = StoreInfoForm(instance=store_email)
+        params['form'] = StoreInfoForm()
     return render(request, 'myapp/store_setting.html', params)
 
 @login_required
@@ -83,3 +84,30 @@ def store_mypage(request):
         return render(request, 'myapp/debug_mypage.html', params)
     else:
         return redirect('myapp:store_setting')
+
+@login_required
+def store_mypage_edit(request):
+    params = {'message': '', 'form': None, 'data': None}
+    if request.method == 'POST':
+        form_instance = StoreInfo(STORE_EMAIL=request.user)     #現在のユーザー名のインスタンスをmodelから取得
+        form = StoreInfoForm(request.POST, instance=form_instance)
+        if form.is_valid():
+            StoreInfo.objects.filter(STORE_EMAIL=request.user).update(STORE_EMAIL=None)     #Emailがユニークキーなので厄介。一旦NULLに書き換えた後にformの内容で更新
+            form.save()
+            return redirect('myapp:store_mypage')
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
+    else:
+        data_buf = StoreInfo.objects.filter(STORE_EMAIL=request.user).first()
+        data = {
+            'STORE_EMAIL': data_buf.STORE_EMAIL,
+            'STORE_NAME': data_buf.STORE_NAME,
+            'STORE_POSTAL_CODE': data_buf.STORE_POSTAL_CODE,
+            'STORE_ADDRESS': data_buf.STORE_ADDRESS,
+            'STORE_TEL': data_buf.STORE_TEL
+        }
+
+        params['form'] = StoreInfoForm()
+        params['data'] = data
+    return render(request, 'myapp/debug_mypage_edit.html', params)
