@@ -11,4 +11,5 @@ urlpatterns = [
     path('debug_storeinfo/', views.debug_storeinfo, name='debug_storeinfo'),    #debug
     path('debug_storeinfolist/', views.debug_storeinfolist, name='debug_storeinfolist'),    #debug
     path('store_setting/', views.store_setting, name='store_setting'),
+    path('store_mypage/', views.store_mypage, name='store_mypage'),
 ]

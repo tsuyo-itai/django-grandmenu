@@ -128,7 +128,7 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = 'accounts:login'
-LOGIN_REDIRECT_URL = 'myapp:home'
+LOGIN_REDIRECT_URL = 'myapp:store_mypage'
 
 # accountsのUserが認証モデル
 AUTH_USER_MODEL = 'accounts.User'

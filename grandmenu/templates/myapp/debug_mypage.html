@@ -1,0 +1,27 @@
+{% extends "accounts/base.html" %}
+{% load widget_tweaks %}
+{% block global_navi %}
+
+    <div class="row">
+        <div class="col-md">
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan=2>登録情報一覧</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shopinfo1, shopinfo2 in data.items %}
+                    <tr>
+                        <th class="bg-info text-white" scope="row">{{shopinfo1}}</th>
+                        <td class="bg-light text-dark">{{shopinfo2}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
