@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from .forms import StoreInfoForm
 from .models import StoreInfo
-
-
+from django.utils.safestring import mark_safe
+import json
 
 # Create your views here.
 class Home(generic.TemplateView):
@@ -106,3 +106,13 @@ def store_mypage_edit(request):
         params['form'] = StoreInfoForm()
         params['data'] = data
     return render(request, 'myapp/debug_mypage_edit.html', params)
+
+
+def debug_websocket(request):
+    # return render(request, 'myapp/debug_websocket.html', {})
+    return render(request, 'myapp/debug_websocket.html')
+
+def debug_websocket_room(request, room_name):
+    return render(request, 'myapp/debug_websocket_room.html', {
+        'room_name_json': mark_safe(json.dumps(room_name))
+    })

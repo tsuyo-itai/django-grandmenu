@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',       #myapp追加
     'accounts.apps.AccountsConfig', #accounts追加
     'widget_tweaks',    #login画面CSS対応に必要
+    'channels',     #websocket対応に必要
 ]
 
 MIDDLEWARE = [
@@ -74,6 +75,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'grandmenu.wsgi.application'
 
+#redisを使うには「brew install redis」が必要
+#↑自動起動設定「brew services start redis」を1回    止めたい場合は「brew services stop redis」
+
+#websocket layer_setting
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -134,6 +147,7 @@ LOGIN_REDIRECT_URL = 'myapp:store_mypage'
 AUTH_USER_MODEL = 'accounts.User'
 # メールをコンソールに表示する
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+#websocket対応に必要
+ASGI_APPLICATION = 'grandmenu.routing.application'      #grandmenu/routing.py参照
 
 
