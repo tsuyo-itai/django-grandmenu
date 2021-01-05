@@ -34,7 +34,7 @@ $(document).ready(function(){
           '</div>'+
         '</li>'+
         '<ul class="side_menu_2">'+
-          '<li><a class="side_menu_2__content" href="/store_setting">店舗情報</a></li>'+
+          '<li><a class="side_menu_2__content" href="/store_mypage">店舗情報</a></li>'+
           '<li><a class="side_menu_2__content" href="#">従業員情報</a></li>'+
           '<li><a class="side_menu_2__content" href="/sales_management">売上管理</a></li>'+
         '</ul>'+

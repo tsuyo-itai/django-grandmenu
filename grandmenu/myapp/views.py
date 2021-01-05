@@ -67,7 +67,8 @@ def store_mypage_edit(request):
         form_instance = StoreInfo(STORE_EMAIL=request.user)     #現在のユーザー名のインスタンスをmodelから取得
         form = StoreInfoForm(request.POST, instance=form_instance)
         if form.is_valid():
-            StoreInfo.objects.filter(STORE_EMAIL=request.user).update(STORE_EMAIL=None)     #Emailがユニークキーなので厄介。一旦NULLに書き換えた後にformの内容で更新
+            # StoreInfo.objects.filter(STORE_EMAIL=request.user).update(STORE_EMAIL=None)     #Emailがユニークキーなので厄介。一旦NULLに書き換えた後にformの内容で更新
+            StoreInfo.objects.filter(STORE_EMAIL=request.user).delete()     #上記updateを行うとゴミmodel情報(EMAIL=NULL)が残るのでdeleteで消してしまう。
             form.save()
             return redirect('myapp:store_mypage')
         else:
