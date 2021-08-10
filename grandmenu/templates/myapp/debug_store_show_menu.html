@@ -1,0 +1,32 @@
+{% extends "accounts/base.html" %}
+{% load widget_tweaks %}
+{% block global_navi %}
+
+
+<form class="form--store_information" action="{% url 'myapp:store_show_menu' %}" method="post">
+    {% csrf_token %}
+  <!-- ここはログインユーザーで自動入力(formとして送信しないとエラーになるため　hiddenとして確保) -->
+  {% comment %} <div hidden>{% render_field form.STORE_INFO class='text_box--small' placeholder=form.STORE_INFO.label %}</div> {% endcomment %}
+
+    {% comment %} {% render_field form.CLASS1_ID class='text_box--small' placeholder=form.CLASS1_ID.label %} {% endcomment %}
+  
+    {% render_field form.CLASS1 class='text_box--small' placeholder=form.CLASS1.label %}
+  
+    {% comment %} {% render_field form.CLASS2_ID class='text_box--small' placeholder=form.CLASS2_ID.label %} {% endcomment %}
+  
+    {% render_field form.CLASS2 class='text_box--small' placeholder=form.CLASS2.label %}
+
+    {% comment %} {% render_field form.CLASS3_ID class='text_box--small' placeholder=form.CLASS3_ID.label %} {% endcomment %}
+
+    {% render_field form.CLASS3 class='text_box--small' placeholder=form.CLASS3.label %}
+
+    {% render_field form.PLICE class='text_box--small' placeholder=form.PLICE.label %}
+
+
+    <button class="form__button" type="submit" name="store_id">
+      <span>確定</span>
+      <span>登録</span>
+    </button>
+  </form>
+
+{% endblock %}
