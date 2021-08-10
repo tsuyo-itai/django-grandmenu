@@ -7,6 +7,7 @@ app_name = 'myapp'
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('store_setting/', views.store_setting, name='store_setting'),
+    path('store_show_menu/', views.store_show_menu, name='store_show_menu'),
     path('store_mypage/', views.store_mypage, name='store_mypage'),
     path('store_mypage/edit/', views.store_mypage_edit, name='store_mypage_edit'),
     path('debug_websocket/', views.debug_websocket, name='debug_websocket'),    #debug

@@ -22,7 +22,7 @@ $(document).ready(function(){
           '</div>'+
         '</li>'+
         '<ul class="side_menu_2">'+
-          '<li><a class="side_menu_2__content" href="/show_menu">メニュー表登録・修正</a></li>'+
+          '<li><a class="side_menu_2__content" href="/store_show_menu">メニュー表登録・修正</a></li>'+
           '<li><a class="side_menu_2__content" href="/qrcode/generate">QRコード発行</a></li>'+
           '<li><a class="side_menu_2__content" href="/activate">テーブルアクティベート</a></li>'+
         '</ul>'+
@@ -43,7 +43,7 @@ $(document).ready(function(){
     );
   };
   // カートの表示
-  if(pathname == '/order_menu' || pathname == '/show_menu'){
+  if(pathname == '/order_menu' || pathname == '/store_show_menu'){
     $('.wrapper--header').append(
       '<div class="header__cart js-show__lightbox" data-show="cart">'+
       '<div class="header__quantity"></div>'+
@@ -51,7 +51,7 @@ $(document).ready(function(){
     );
   };
   // websocketのエラー表示
-  if(pathname == '/show_menu' || pathname == '/order_menu' || pathname == '/activate'){
+  if(pathname == '/store_show_menu' || pathname == '/order_menu' || pathname == '/activate'){
     $('.wrapper--main').append(
       '<div class="lightbox--ws_error">'+
         '<div class="lightbox--ws_error__wi-fi"></div>'+
@@ -60,7 +60,7 @@ $(document).ready(function(){
     );
   };
   // websocketに関するモジュール
-  if (pathname == '/show_menu' || pathname == '/order_menu') {
+  if (pathname == '/store_show_menu' || pathname == '/order_menu') {
     $.getScript(ws_order);
   } else if (pathname == '/activate') {
     $.getScript(ws_kitchin);

@@ -1,5 +1,6 @@
 from django import forms
-from .models import StoreInfo
+from django.forms.models import ModelChoiceField
+from .models import StoreInfo, StoreMenu
 
 """========================================================
 店舗情報作成・編集用フォーム
@@ -26,3 +27,13 @@ class StoreInfoForm(forms.ModelForm):
         }
 
         exclude = ["STORE_EMAIL"]       #Form入力の除外を行う
+
+
+class StoreMenuForm(forms.ModelForm):
+    STORE_INFO = ModelChoiceField(queryset=StoreInfo.objects.all(), required=False)
+
+    class Meta:
+        model = StoreMenu
+        fields = '__all__'
+
+        exclude = ["STORE_INFO", "CLASS1_ID", "CLASS2_ID", "CLASS3_ID"]       #Form入力の除外を行う

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic
-from .forms import StoreInfoForm
-from .models import StoreInfo
+from .forms import StoreInfoForm, StoreMenuForm
+from .models import StoreInfo, StoreMenu
 from django.utils.safestring import mark_safe
 import json
 
@@ -27,6 +27,27 @@ def store_setting(request):
     else:
         params['form'] = StoreInfoForm()
     return render(request, 'myapp/store_setting.html', params)
+
+@login_required
+def store_show_menu(request):
+    params = {'message': '', 'form': None}
+
+    if request.method == 'POST':
+        form = StoreMenuForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.STORE_INFO = StoreInfo.objects.get(STORE_EMAIL=request.user)
+            post.save()
+            return redirect('myapp:store_show_menu')
+    else:
+        #店舗情報が入力されているか?
+        if StoreInfo.objects.filter(STORE_EMAIL=request.user).exists():
+            params['form'] = StoreMenuForm()
+        else:
+            return redirect('myapp:store_setting')
+
+    return render(request, 'myapp/debug_store_show_menu.html', params)
 
 @login_required
 def store_mypage(request):

@@ -13,3 +13,18 @@ class StoreInfo(models.Model):
 
     def __str__(self):
         return self.STORE_NAME
+
+
+class StoreMenu(models.Model):
+    #menuIDはデフォルトで設定されているid
+    STORE_INFO = models.ForeignKey(StoreInfo, on_delete=models.CASCADE, null=True, blank=True)
+    CLASS1_ID = models.IntegerField(default=1)
+    CLASS1 = models.CharField(max_length=50)
+    CLASS2_ID = models.IntegerField(default=1)
+    CLASS2 = models.CharField(max_length=50)
+    CLASS3_ID = models.IntegerField(default=1)
+    CLASS3 = models.CharField(max_length=50)
+    PLICE = models.IntegerField()
+
+    def __str__(self):
+        return self.CLASS3
