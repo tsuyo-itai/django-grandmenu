@@ -13,9 +13,14 @@ class LoginForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
+        self.fields['username'].widget.attrs['class'] ='text_box--small'
+        self.fields['username'].widget.attrs['placeholder'] ='登録メールアドレス'
+        self.fields['password'].widget.attrs['class'] ='text_box--small'
+        self.fields['password'].widget.attrs['placeholder'] ='パスワード'
+
+        # for field in self.fields.values():
+        #     field.widget.attrs['class'] = 'form-control'
+        #     field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
 
 class UserCreateForm(UserCreationForm):
     """ユーザー登録用フォーム"""
@@ -26,8 +31,15 @@ class UserCreateForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['class'] ='text_box--small'
+        self.fields['email'].widget.attrs['placeholder'] ='登録メールアドレス'
+        self.fields['password1'].widget.attrs['class'] ='text_box--small'
+        self.fields['password1'].widget.attrs['placeholder'] ='パスワード'
+        self.fields['password2'].widget.attrs['class'] ='text_box--small'
+        self.fields['password2'].widget.attrs['placeholder'] ='パスワード(確認用)'
+
+        # for field in self.fields.values():
+        #     field.widget.attrs['class'] = 'form-control'
 
     def clean_email(self):
         email = self.cleaned_data['email']

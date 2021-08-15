@@ -1,5 +1,4 @@
 {% extends "accounts/base.html" %}
-{% load widget_tweaks %}
 {% block global_navi %}
 
     <div class="wrapper--login">
@@ -15,9 +14,9 @@
       <form class="js-form--login form--login" action="{% url 'accounts:login' %}" method="post" data-target="login_form">
         {% csrf_token %}
         <!-- <input class="text_box--small" type="email" name="e_mail" placeholder="ログインメールアドレス" required> -->
-        {% render_field form.username class='text_box--small' placeholder='ログインメールアドレス' %}
+        {{ form.username }}
         <!-- <input class="text_box--small" type="password" name="password" placeholder="password" required> -->
-        {% render_field form.password class='text_box--small' placeholder='password' %}
+        {{ form.password }}
         <!-- <div class="error">{{session.error}}</div> -->
         <div class="error">{{ form.non_field_errors }}</div>
         {{ field.errors }}

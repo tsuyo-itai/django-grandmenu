@@ -1,28 +1,17 @@
 {% extends "accounts/base.html" %}
-{% load widget_tweaks %}
 {% block global_navi %}
 <div class="wrapper--login">
-    <div class="error"">Grandmenu会員登録</div>
+    <div class="error">Grandmenu会員登録</div>
         <form action="" method="POST">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
-            {% for field in form %}
-            {% if field.label == "メールアドレス" %}
-            {% render_field field class='text_box--small' placeholder='登録用メールアドレス' %}
-            {% endif %}
-
-            {% if field.label == "パスワード" %}
-            {% render_field field class='text_box--small' placeholder='パスワード' %}
-            {% endif %}
-
-            {% if field.label == "パスワード(確認用)" %}
-            {% render_field field class='text_box--small' placeholder='確認用パスワード' %}
-            {% endif %}
-
-            <div class="error">{{ field.errors }}</div>
-
-            {% endfor %}
+            {{ form.email }}
+            <div class="error">{{ form.email.errors }}</div>
+            {{ form.password1 }}
+            <div class="error">{{ form.password1.errors }}</div>
+            {{ form.password2 }}
+            <div class="error">{{ form.password2.errors }}</div>
 
             <button class="form__button" type="submit">
                 <span>確定</span>

@@ -1,26 +1,26 @@
 {% extends "accounts/base.html" %}
-{% load widget_tweaks %}
 {% block global_navi %}
 
-<form class="form--store_information" action="" method="post">
-    {% csrf_token %}
-    <!-- ここはログインユーザーで自動入力(formとして送信しないとエラーになるため　hiddenとして確保) -->
-    <!-- <div hidden>{% render_field form.STORE_EMAIL class='text_box--small' placeholder=form.STORE_EMAIL.label value=data.STORE_EMAIL %}</div> -->
-  
-    {% render_field form.STORE_NAME class='text_box--small' placeholder=form.STORE_NAME.label value=data.STORE_NAME %}
-  
-    {% render_field form.STORE_POSTAL_CODE class='text_box--small' placeholder=form.STORE_POSTAL_CODE.label value=data.STORE_POSTAL_CODE %}
-    <div class="error">{{form.STORE_POSTAL_CODE.errors}}</div>
-  
-    {% render_field form.STORE_ADDRESS class='text_box--small' placeholder=form.STORE_ADDRESS.label value=data.STORE_ADDRESS %}
-  
-    {% render_field form.STORE_TEL class='text_box--small' placeholder=form.STORE_TEL.label value=data.STORE_TEL %}
-    <div class="error">{{form.STORE_TEL.errors}}</div>
-  
-    <button class="form__button" type="submit" name="store_id">
-      <span>確定</span>
-      <span>登録</span>
-    </button>
+<form class="form--store_information" action="{% url 'myapp:store_setting' %}" method="post">
+  {% csrf_token %}
+  <!-- ここはログインユーザーで自動入力(formとして送信しないとエラーになるため　hiddenとして確保) -->
+
+  {{ form.STORE_NAME }}
+  <div class="error">{{form.STORE_NAME.errors}}</div>
+
+  {{ form.STORE_POSTAL_CODE }}
+  <div class="error">{{form.STORE_POSTAL_CODE.errors}}</div>
+
+  {{ form.STORE_ADDRESS }}
+  <div class="error">{{form.STORE_ADDRESS.errors}}</div>
+
+  {{ form.STORE_TEL }}
+  <div class="error">{{form.STORE_TEL.errors}}</div>
+
+  <button class="form__button" type="submit" name="store_id">
+    <span>確定</span>
+    <span>登録</span>
+  </button>
     <center>
       <a href="{% url 'myapp:store_mypage' %}">
           <button type="button" class="btn col-sm-6 btn-info">戻る</button>

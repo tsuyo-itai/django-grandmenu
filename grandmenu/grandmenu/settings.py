@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',       #myapp追加
     'accounts.apps.AccountsConfig', #accounts追加
-    'widget_tweaks',    #login画面CSS対応に必要
     'channels',     #websocket対応に必要
 ]
 

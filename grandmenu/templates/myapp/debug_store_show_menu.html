@@ -1,5 +1,4 @@
 {% extends "accounts/base.html" %}
-{% load widget_tweaks %}
 {% block global_navi %}
 
 
@@ -10,17 +9,21 @@
 
     {% comment %} {% render_field form.CLASS1_ID class='text_box--small' placeholder=form.CLASS1_ID.label %} {% endcomment %}
   
-    {% render_field form.CLASS1 class='text_box--small' placeholder=form.CLASS1.label %}
-  
+    {{ form.CLASS1 }}
+      <div class="error">{{form.CLASS1.errors}}</div>
+
     {% comment %} {% render_field form.CLASS2_ID class='text_box--small' placeholder=form.CLASS2_ID.label %} {% endcomment %}
   
-    {% render_field form.CLASS2 class='text_box--small' placeholder=form.CLASS2.label %}
+    {{ form.CLASS2 }}
+    <div class="error">{{form.CLASS2.errors}}</div>
 
     {% comment %} {% render_field form.CLASS3_ID class='text_box--small' placeholder=form.CLASS3_ID.label %} {% endcomment %}
 
-    {% render_field form.CLASS3 class='text_box--small' placeholder=form.CLASS3.label %}
+    {{ form.CLASS3 }}
+    <div class="error">{{form.CLASS3.errors}}</div>
 
-    {% render_field form.PLICE class='text_box--small' placeholder=form.PLICE.label %}
+    {{ form.PLICE }}
+    <div class="error">{{form.PLICE.errors}}</div>
 
 
     <button class="form__button" type="submit" name="store_id">

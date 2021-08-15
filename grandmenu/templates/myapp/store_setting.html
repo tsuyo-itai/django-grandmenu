@@ -1,20 +1,18 @@
 {% extends "accounts/base.html" %}
-{% load widget_tweaks %}
 {% block global_navi %}
 
 <form class="form--store_information" action="{% url 'myapp:store_setting' %}" method="post">
   {% csrf_token %}
   <!-- ここはログインユーザーで自動入力(formとして送信しないとエラーになるため　hiddenとして確保) -->
-  <!-- <div hidden>{% render_field form.STORE_EMAIL class='text_box--small' placeholder=form.STORE_EMAIL.label %}</div> -->
 
-  {% render_field form.STORE_NAME class='text_box--small' placeholder=form.STORE_NAME.label %}
+  {{ form.STORE_NAME }}
+  {{ form.STORE_POSTAL_CODE }}
 
-  {% render_field form.STORE_POSTAL_CODE class='text_box--small' placeholder=form.STORE_POSTAL_CODE.label %}
   <div class="error">{{form.STORE_POSTAL_CODE.errors}}</div>
 
-  {% render_field form.STORE_ADDRESS class='text_box--small' placeholder=form.STORE_ADDRESS.label %}
+  {{ form.STORE_ADDRESS }}
+  {{ form.STORE_TEL }}
 
-  {% render_field form.STORE_TEL class='text_box--small' placeholder=form.STORE_TEL.label %}
   <div class="error">{{form.STORE_TEL.errors}}</div>
 
   <button class="form__button" type="submit" name="store_id">

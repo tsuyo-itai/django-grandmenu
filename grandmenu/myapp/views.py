@@ -15,11 +15,11 @@ def store_setting(request):
     params = {'message': '', 'form': None}
 
     if request.method == 'POST':
-        form = StoreInfoForm(request.POST)
+        form_instance = StoreInfo(STORE_EMAIL=request.user)     #現在のユーザー名のインスタンスをmodelから取得
+        form = StoreInfoForm(request.POST, instance=form_instance)
         if form.is_valid():
-            post = form.save(commit=False)      #変更を加える場合は(commit=False)オプション。　それ以外はform.saveで良い(このときpost変数に受ける必要もない)
-            post.STORE_EMAIL = request.user          #ログインユーザーEmail取得(不正html操作で書き換えられてもここで正確に入力する)
-            post.save()
+            StoreInfo.objects.filter(STORE_EMAIL=request.user).delete()     #上記updateを行うとゴミmodel情報(EMAIL=NULL)が残るのでdeleteで消してしまう。
+            form.save()
             return redirect('myapp:store_mypage')
         else:
             params['message'] = '再入力して下さい'
@@ -39,7 +39,11 @@ def store_show_menu(request):
             post = form.save(commit=False)
             post.STORE_INFO = StoreInfo.objects.get(STORE_EMAIL=request.user)
             post.save()
+            print("登録しました")
             return redirect('myapp:store_show_menu')
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
     else:
         #店舗情報が入力されているか?
         if StoreInfo.objects.filter(STORE_EMAIL=request.user).exists():
@@ -83,7 +87,7 @@ def store_mypage(request):
 
 @login_required
 def store_mypage_edit(request):
-    params = {'message': '', 'form': None, 'data': None}
+    context = {'message': '', 'form': None, 'data': None}
     if request.method == 'POST':
         form_instance = StoreInfo(STORE_EMAIL=request.user)     #現在のユーザー名のインスタンスをmodelから取得
         form = StoreInfoForm(request.POST, instance=form_instance)
@@ -93,21 +97,26 @@ def store_mypage_edit(request):
             form.save()
             return redirect('myapp:store_mypage')
         else:
-            params['message'] = '再入力して下さい'
-            params['form'] = form
+            context['message'] = '再入力して下さい'
+            context['form'] = form
     else:
-        data_buf = StoreInfo.objects.filter(STORE_EMAIL=request.user).first()
-        data = {
-            'STORE_EMAIL': data_buf.STORE_EMAIL,
-            'STORE_NAME': data_buf.STORE_NAME,
-            'STORE_POSTAL_CODE': data_buf.STORE_POSTAL_CODE,
-            'STORE_ADDRESS': data_buf.STORE_ADDRESS,
-            'STORE_TEL': data_buf.STORE_TEL
+        data = StoreInfo.objects.filter(STORE_EMAIL=request.user).first()
+        initial_data = {
+            'STORE_EMAIL': data.STORE_EMAIL,
+            'STORE_NAME': data.STORE_NAME,
+            'STORE_POSTAL_CODE': data.STORE_POSTAL_CODE,
+            'STORE_ADDRESS': data.STORE_ADDRESS,
+            'STORE_TEL': data.STORE_TEL
+        }
+        form = StoreInfoForm(
+            initial=initial_data
+        )
+    
+        context = {
+            'form': form
         }
 
-        params['form'] = StoreInfoForm()
-        params['data'] = data
-    return render(request, 'myapp/debug_mypage_edit.html', params)
+    return render(request, 'myapp/debug_mypage_edit.html', context)
 
 
 def debug_websocket(request):
